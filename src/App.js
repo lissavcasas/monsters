@@ -1,35 +1,43 @@
-import React, { Component } from 'react';
-import CardList from './components/card-list/card-list'
+import React from 'react';
+/* import CardList from './components/card-list/card-list'; */
+import { BrowserRouter, Route } from 'react-router-dom';
+
 import './App.css';
 
+const HomePage = () => {
+  return (
+    <div>
+      <h1>HOME Page</h1>
+    </div>
+  );
+};
 
-class App extends Component {
+const TopicList = () => {
+  return (
+    <div>
+      <h1>TopicList PAGE </h1>
+    </div>
+  );
+};
 
-  constructor() {
-    super();
+const TopicDetail = () => {
+  return (
+    <div>
+      <h1>TopicDetail PAGE</h1>
+    </div>
+  );
+};
 
-    this.state = {
-      monsters: [ ]
-    };
-  }
-  
-  componentDidMount(){
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(res => res.json())
-      .then(users => this.setState({monsters: users})) ;
-      /* console.log(users) */
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <CardList monsters={this.state.monsters}>
-         
-        </CardList>
-        
-      </div>
-    );
-  }
+function App() {
+  return (
+    <div>
+      <BrowserRouter>
+        <Route exact path='/' component={HomePage} />
+        <Route exact path='/topics' component={TopicList} />
+        <Route path='/topics/:topicId' component={TopicDetail} />
+      </BrowserRouter>
+    </div>
+  )
 }
 
 export default App;
